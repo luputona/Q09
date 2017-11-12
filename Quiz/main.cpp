@@ -48,7 +48,7 @@ void SelectMenu()
 {	
 	cout << "\t\t1. 단어 입력 하기 2. 문제풀기 3. 단어보기" << endl << endl;
 }
-void main()
+void main1()
 {
 	English<string> Eng;
 	Korean<string> Kor;
@@ -57,6 +57,7 @@ void main()
 	int nScore = 5;
 	int nTotalScore = 0;
 	int nQcount = 0;
+
 	int inputNullCheck = 0;
 	string strinput = "";
 	char pInput[MAX] = { 0, };
@@ -86,64 +87,52 @@ void main()
 			{
 				cout << "\t\t\t영어 단어를 입력해 주세요: ";
 				scanf("%s", pInput);
-				//cin.get();
-				//cin.getline(pInput, MAX);
-
-				inputNullCheck++;
-				if (pInput[inputNullCheck] == '\0')
-				{
-					int k;
-					for (k = inputNullCheck; k < MAX; k++ )
-					{
-						pInput[k] = '\0';
-					}
-					inputNullCheck = 0;
-				}
-
+			
 				strinput = pInput;
 
 				if (Eng.GetDataForIndex(0).empty())
 				{
-					Eng.Add(strinput);
+					Eng.Add(strinput);					
 					enloopcheck = 0;
 				}
-				else if (!Eng.GetDataForIndex(0).empty())
+				for (int i = 0; i <= Eng.Size(); i++)
 				{
-					for (int i = 0; i< Eng.Size(); i++)
+					if (Eng.GetDataForIndex(i) != strinput)
 					{
-						if (Eng.GetDataForIndex(i) == strinput)
-						{
-							cout << "\n이미 있는 단어 입니다. 다시 입력해 주세요." << endl << endl;							
-							system("PAUSE");
-							break;
-						}
-						else if(Eng.GetDataForIndex(i) != strinput)
-						{
-							Eng.Add(pInput);
-							enloopcheck = 0;
-							break;
-						}
+						inputNullCheck++;
 					}
-					continue;
+					else if (inputNullCheck == Eng.Size())
+					{
+						Eng.Add(strinput);
+						enloopcheck = 0;
+						cout << "debolg" << endl;
+						break;
+					}
+					else if (!Eng.GetDataForIndex(0).empty() && Eng.GetDataForIndex(i) == strinput)
+					{
+						cout << "\n이미 있는 단어 입니다. 다시 입력해 주세요." << endl << endl;
+						system("PAUSE");
+						continue;
+					}					
 				}
+				/*if (!Eng.GetDataForIndex(0).empty())
+				{
+					
+				}
+				for (int i = 0; i <= Eng.Size(); i++)
+				{
+					
+				}*/
+				
+				
+				
 			}
-			
 
-			while (korloopcheck == 1)
+			/*while (korloopcheck == 1)
 			{
 				cout << "\n\t\t\t단어의 뜻을 입력해 주세요: ";
 				scanf("%s", pInput);
-
-				inputNullCheck++;
-				if (pInput[inputNullCheck] == '\0')
-				{
-					int k;
-					for (k = inputNullCheck; k < MAX; k++)
-					{
-						pInput[k] = '\0';
-					}
-					inputNullCheck = 0;
-				}
+								
 				strinput = pInput;
 
 				if (Kor.GetDataForIndex(0).empty())
@@ -153,26 +142,36 @@ void main()
 				}
 				else if (!Kor.GetDataForIndex(0).empty())
 				{
-					for (int i = 0; i < Kor.Size(); i++)
+					for (int i = 0; i <= Kor.Size(); i++)
 					{
+						
 						if (Kor.GetDataForIndex(i) == strinput)
 						{
 							cout << "\n이미 있는 단어 입니다. 다시 입력해 주세요." << endl << endl;							
 							system("PAUSE");
 							break;
-						}
-						else if (Kor.GetDataForIndex(i) != strinput)
-						{
-							Kor.Add(strinput);
-							korloopcheck = 0;
-							break;
-						}
+						}	
+						continue;
 					}
-					continue;
 				}
+				for (int i = 1; i <= Kor.Size(); i++)
+				{
+					if (Kor.GetDataForIndex(i).empty() && Kor.GetDataForIndex(i) != strinput)
+					{
+						Kor.Add(strinput);
+						korloopcheck = 0;
+						break;
+					}
+				}
+				
+			}*/
+			
+			nCheckIndex++;
+			for (int i = 0; i < MAX; i++)
+			{
+				pInput[i] = '\0';
 			}
-			
-			
+
 
 			cout << endl;
 		}
